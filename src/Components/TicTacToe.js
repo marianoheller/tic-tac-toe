@@ -16,6 +16,7 @@ export default class TicTacToe extends Component {
 		// var origBoard = ["O",1,"X","X",4,"X",6,"O","O"];
 		//var origBoard = [0, 1, 2, 3, "O", 5, 6, 7 ,9];
 		this.state = {
+			difficulty: "Normal",
 			started: false,
 			puntaje: {
 				huPlayer: 0,
@@ -35,7 +36,7 @@ export default class TicTacToe extends Component {
 			huPlayer: this.state.huPlayer,
 			aiPlayer: this.state.aiPlayer
 		};
-		const gameState = processGameStep(board, symbols);
+		const gameState = processGameStep(board, symbols, this.state.difficulty);
 
 		const newBoard = gameState.board;
 		const newState = {
@@ -45,7 +46,6 @@ export default class TicTacToe extends Component {
 		if( gameState.winner !== null ) {
 			newState.puntaje[gameState.winner] = this.state.puntaje[gameState.winner] + 1;
 		}
-		console.log(newState.puntaje);
 		this.setState( newState );
 	}
 
@@ -66,7 +66,8 @@ export default class TicTacToe extends Component {
 
 		let Game = <Start onStart={this.startGame.bind(this)}></Start>
 		if ( started ) {
-			Game = <Board 
+			Game = <Board
+			difficulty={this.state.difficulty}
 			puntaje={this.state.puntaje} 
 			updateBoard={this.updateBoard.bind(this)} 
 			board={board} 

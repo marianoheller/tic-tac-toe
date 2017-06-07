@@ -27,6 +27,9 @@ export default class Board extends Component {
         return (
             <div className="pure-g board-container">
                 <div className="pure-u-1">
+                    {this.props.difficulty}
+                </div>
+                <div className="pure-u-1">
                     {scores}
                 </div>
                 <div className="pure-u-1">

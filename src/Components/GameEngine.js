@@ -2,7 +2,7 @@
 
 const MAX_VALUE = 99999999;
 
-export function ComputerMove ( board , symbols) {
+export function ComputerMove ( board , symbols, difficulty) {
 
 	const { huPlayer, aiPlayer } = symbols;
 	
@@ -87,7 +87,33 @@ export function ComputerMove ( board , symbols) {
 		return bestMove;
 	}
 
-	return findBestMove();
+	function findEasyMove() {
+		const leftMoves = AIHelpers.getEmptyIndexies(board, symbols);
+		const randomIndex = Math.floor( Math.random() * leftMoves.length );
+		return leftMoves[randomIndex];
+	}
+
+	function findNormalMove() {
+		const bestMove = findBestMove();
+		const dumbMove = findEasyMove();
+		return Math.random() < 0.75 ? bestMove : dumbMove;
+	}
+
+	let ret = -1;
+	switch (difficulty) {
+		case "Easy":
+			ret =  findEasyMove();
+			break;
+		case "Normal":
+			ret = findNormalMove();
+			break;
+		case "Hard":
+			ret = findBestMove();
+			break;
+		default:
+		throw Error("Error en seteo de dificultad");
+	}
+	return ret;
 }
 
 export class AIHelpers {
@@ -132,7 +158,7 @@ export class AIHelpers {
 
 
 
-export function processGameStep(board, symbols) {
+export function processGameStep(board, symbols, difficulty) {
 
 	const gameState = {
 		winner: null,
@@ -141,7 +167,7 @@ export function processGameStep(board, symbols) {
 
 	function computeAIAfterBoard() {
 		
-		const bestMove = ComputerMove(board, symbols);
+		const bestMove = ComputerMove(board, symbols, difficulty);
 
 		if ( bestMove === undefined ) {   return (new Array(9)).fill(0).map( (e,i) => i);   }
 		const newBoard = Array.from(board);
