@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 
-export class Board extends Component {
+export default class Board extends Component {
 
     boardChanged(value) {
         const { board, symbols, updateBoard } = this.props;
@@ -13,7 +13,7 @@ export class Board extends Component {
 
 
     render() {
-        const { board } = this.props;
+        const { board, puntaje } = this.props;
         const casilleros = (new Array(9)).fill(0).map( (e,i) => 
             <Casillero 
                 key={i}
@@ -21,17 +21,23 @@ export class Board extends Component {
                 symbols={this.props.symbols}
                 onBoardChanged={this.boardChanged.bind(this)} >
             </Casillero>
-        ); 
+        );
+        const scores = Object.keys(puntaje).map( (k,i) => <p key={i}>{k}: {puntaje[k]}</p>)
 
         return (
             <div className="pure-g board-container">
-                {casilleros}                
+                <div className="pure-u-1">
+                    {scores}
+                </div>
+                <div className="pure-u-1">
+                    {casilleros}
+                </div>  
             </div>
         )
     }
 }
 
-export class Casillero extends Component {
+class Casillero extends Component {
 
     handleClick(e) {
         const { symbols, value, onBoardChanged } = this.props
@@ -40,10 +46,12 @@ export class Casillero extends Component {
     }
 
     render() {
+        const { value } = this.props;
+        const val = isNaN(value) ? value : " " ;
         return (
             <div className="pure-u-8-24">
                 <div onClick={this.handleClick.bind(this)} className="casillero-container no-select">
-                    {this.props.value}
+                    { val }
                 </div>
             </div>
         )
