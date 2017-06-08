@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 
 
@@ -22,19 +22,28 @@ export default class Board extends Component {
                 onBoardChanged={this.boardChanged.bind(this)} >
             </Casillero>
         );
-        const scores = Object.keys(puntaje).map( (k,i) => <p key={i}>{k}: {puntaje[k]}</p>)
+        const scores = Object.keys(puntaje).map( (k,i) => <p key={i}>{k==="huPlayer" ? "You" : "Computer"}: {puntaje[k]}</p>)
 
         return (
             <div className="pure-g board-container">
                 <div className="pure-u-1">
-                    {this.props.difficulty}
+                    Difficulty: {this.props.difficulty}
                 </div>
                 <div className="pure-u-1">
+                    <CSSTransitionGroup
+                    transitionName="scoresElement" 
+                    transitionEnterTimeout={800}
+                    transitionLeaveTimeout={800}>
                     {scores}
+                    </CSSTransitionGroup>
+                    
                 </div>
                 <div className="pure-u-1">
                     {casilleros}
-                </div>  
+                </div>
+                <div className="pure-u-1 reset-button-container">
+                    <button onClick={this.props.onReset} className="pure-button pure-button-primary reset-button">Table Flip!</button>
+                </div>
             </div>
         )
     }

@@ -49,11 +49,37 @@ export default class TicTacToe extends Component {
 		this.setState( newState );
 	}
 
-	startGame() {
+	startGame(difficulty, symbol) {
+		let aiPlayer, huPlayer;
+
+		switch (symbol) {
+			case "X":
+				huPlayer = "X";
+				aiPlayer = "O";
+				break;
+			case "O":
+				huPlayer = "O";
+				aiPlayer = "X";
+				break;
+			default:
+				throw Error("Error de simbolo asignado");
+		}
+
 		this.setState( {
 			...this.state,
-			started: true
+			started: true,
+			difficulty: difficulty,
+			huPlayer: huPlayer,
+			aiPlayer: aiPlayer
 		});
+	}
+
+	resetGame() {
+		this.setState( {
+			...this.state,
+			started: false,
+			board: (new Array(9)).fill(0).map( (e,i) => i)
+		})
 	}
 	
 	
@@ -64,9 +90,14 @@ export default class TicTacToe extends Component {
 			aiPlayer: this.state.aiPlayer
 		};
 
-		let Game = <Start onStart={this.startGame.bind(this)}></Start>
+		let Game = <Start 
+		difficulty={this.state.difficulty}
+		onStart={this.startGame.bind(this)} 
+		symbols={symbols}>
+		</Start>
 		if ( started ) {
 			Game = <Board
+			onReset={this.resetGame.bind(this)}
 			difficulty={this.state.difficulty}
 			puntaje={this.state.puntaje} 
 			updateBoard={this.updateBoard.bind(this)} 
