@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { processGameStep } from './GameEngine';
+//import { processGameStep } from './GameEngine';
+import { GameStep } from 'tic-tac-toe-minimax'
 import Board from './Board';
 import Start from './Start';
 
@@ -36,7 +37,8 @@ export default class TicTacToe extends Component {
 			huPlayer: this.state.huPlayer,
 			aiPlayer: this.state.aiPlayer
 		};
-		const gameState = processGameStep(board, symbols, this.state.difficulty);
+		//const gameState = processGameStep(board, symbols, this.state.difficulty);
+		const gameState = GameStep(board, symbols, this.state.difficulty);
 
 		const newBoard = gameState.board;
 		const newState = {

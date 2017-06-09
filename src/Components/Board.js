@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 
 
@@ -30,13 +29,7 @@ export default class Board extends Component {
                     Difficulty: {this.props.difficulty}
                 </div>
                 <div className="pure-u-1">
-                    <CSSTransitionGroup
-                    transitionName="scoresElement" 
-                    transitionEnterTimeout={800}
-                    transitionLeaveTimeout={800}>
                     {scores}
-                    </CSSTransitionGroup>
-                    
                 </div>
                 <div className="pure-u-1">
                     {casilleros}
