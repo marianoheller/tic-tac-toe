@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
 //import { processGameStep } from './GameEngine';
-import { GameStep } from 'tic-tac-toe-minimax'
+import Minimax from 'tic-tac-toe-minimax'
 import Board from './Board';
 import Start from './Start';
+
+const { GameStep } = Minimax;
 
 
 

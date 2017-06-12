@@ -7,7 +7,7 @@
     "gh-pages": "^1.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "tic-tac-toe-minimax": "^1.0.0"
+    "tic-tac-toe-minimax": "*"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
