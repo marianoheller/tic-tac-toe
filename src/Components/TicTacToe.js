@@ -112,11 +112,11 @@ export default class TicTacToe extends Component {
 
 		return (
 		<div className="pure-g">
-			<div className="pure-u-6-24"></div>
-			<div className="pure-u-12-24">
+			<div className="pure-u-3-24 pure-u-md-6-24"></div>
+			<div className="pure-u-18-24 pure-u-md-12-24">
 				{Game}
 			</div>
-			<div className="pure-u-6-24"></div>
+			<div className="pure-u-3-24 pure-u-md-6-24"></div>
 		</div>
 		)
 	}
