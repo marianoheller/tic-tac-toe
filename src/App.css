@@ -1,13 +1,13 @@
 body {
     background-color: #222;
     background-image: url("./Media/img/background.jpg");
-    background-size: auto;
+    background-size: cover ;
     background-repeat: no-repeat;
     color: #EEE;
+    height: 1000px
 }
 
 .App {
-    
     margin-top: 50px;
 }
 
